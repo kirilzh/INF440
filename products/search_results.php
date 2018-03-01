@@ -8,24 +8,29 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data for each row
     while ($row = $result->fetch_assoc()) {
-      echo '<section>
-              <div class="container py-3">
-                <div class="card">
-                  <div class="row ">
-                    <div class="col-md-4">
-                        <img src="' . $row["img"] . '" class="w-100">
-                      </div>
-                      <div class="col-md-8 px-3">
-                        <div class="card-block px-3">
-                          <h4 class="card-title">' . $row["name"] . '</h4>
-                          <p class="card-text">' . $row["author"] . '</p>
-                          <p class="card-text">' . $row["price"] . '</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+      echo '<div class="container">
+
+              <div class="row text-center">
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card">
+            <img class="card-img-top" src="' . $row["img"] . '" alt="">
+            <div class="card-body">
+              <h4 class="card-title">' . $row["name"] . '</h4>
+              <p class="card-text">' . $row["author"] . '</p>
+              <p class="card-text">' . $row["price"] . '</p>
+
+            </div>
+            <div class="card-footer">
+              <a href="#" class="btn btn-primary">Find Out More!</a>
+            </div>
+          </div>
+        </div>
+
+        
+      </div>
                 </div>
-            </section>';
+            </div>';
     }
 } else {
     echo "0 results";
