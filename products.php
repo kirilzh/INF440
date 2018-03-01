@@ -45,6 +45,7 @@
       </div>
     </div>
   </nav>
+  <?php include('products/crumbs.php') ?>
 
   <!-- Page Content -->
   <div class="container">
@@ -54,23 +55,18 @@
       <div class="col-lg-3">
 
         <h1 class="my-4">Categories</h1>
-        <div class="list-group">
-          <a href="#" class="list-group-item" data-id="fiction">Fiction</a>
-          <a href="#" class="list-group-item" data-id="non-fiction">Non-Fiction</a>
-        </div>
-
+        <!-- <div class="list-group">
+          <a href="./products/fiction.php" class="list-group-item">Fiction</a>
+          <a href="./products/non-fiction.php" class="list-group-item" data-id="non-fiction">Non-Fiction</a>
+        </div> -->
+        <form method="post" action="products/categories.php">
+          <input name="category" type="submit" value="fiction">
+          <input name="category" type="submit" value="non-fiction">
+        </form>
       </div>
       <!-- /.col-lg-3 -->
-      <!-- <?php include('products/crumbs.php') ?> -->
       <div class="col-lg-9">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Library</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Data</li>
-          </ol>
-        </nav>
-
+        <!-- breadcrumbs -->
         <!-- list of all products -->
         <?php include('products/results.php') ?>
       </div>
