@@ -2,7 +2,7 @@
 include 'db_connection.php';
 
 $conn = openCon();
-$sql = "SELECT * FROM books_t";
+$sql = "SELECT * FROM books";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
