@@ -58,9 +58,11 @@
         <div class="col-lg-3">
             <h2 class="my-4">Search</h2>
             <div class="form-group">
-                <input class="form-control input-sm" id="search-input" type="text" value="Search">
+              <form  action="search-page.php" method="GET">
+                <input class="form-control input-sm" id="search-input" name='search-input' type="text" value="Search">
                 <br>
-                <button class="btn btn-block" id="search-button" type="button"> Submit </button>
+                <button class="btn btn-block" id="search-button" type="submit"> Submit </button>
+              </form>
             </div>
           <h2 class="my-4">Browse</h2>
           <div class="list-group">

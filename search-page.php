@@ -52,10 +52,11 @@
     <!-- Page Content -->
     <div class="container">
       <div class="row text-center">
-        Search/Browse results
+        Search Results
       </div>
-
+<div>
 <?php include('products/search_results.php') ?>
+</div>
     </div>
     <!-- /.container -->
 

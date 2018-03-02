@@ -1,12 +1,14 @@
 <?php
+
 include 'db_connection.php';
-$term = $_GET['query'];
+$term = $_GET['search-input'];
 $conn = openCon();
-$sql = "SELECT * FROM books_t WHERE title = '%$term%";
+$sql = "SELECT * FROM books WHERE name LIKE '%".$term."%'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     // output data for each row
+  
     while ($row = $result->fetch_assoc()) {
       echo '<div class="container">
 
@@ -17,8 +19,8 @@ if ($result->num_rows > 0) {
             <img class="card-img-top" src="' . $row["img"] . '" alt="">
             <div class="card-body">
               <h4 class="card-title">' . $row["name"] . '</h4>
-              <p class="card-text">' . $row["author"] . '</p>
-              <p class="card-text">' . $row["price"] . '</p>
+              <p class="card-text">Author ' . $row["author"] . '</p>
+                <p class="card-text">$' . $row["price"] . '</p>
 
             </div>
             <div class="card-footer">
