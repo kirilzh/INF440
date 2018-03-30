@@ -2,13 +2,24 @@
 include 'db_connection.php';
 
 $conn = openCon();
-$sql = "SELECT * FROM books";
+
+$submit = $_POST["category"] ?? '';
+if ($submit == "fiction") {
+    $type = 0;
+    $sql = "SELECT * FROM books WHERE type = $type";
+} elseif ($submit == "non-fiction") {
+    $type = 1;
+    $sql = "SELECT * FROM books WHERE type = $type";
+} else {
+    $sql = "SELECT * FROM books";
+}
+
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     // output data for each row
     while ($row = $result->fetch_assoc()) {
-      echo '<section>
+        echo '<section>
               <div class="container py-3">
                 <div class="card">
                   <div class="row ">
