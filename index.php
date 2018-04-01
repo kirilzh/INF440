@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,9 +43,19 @@
               <a class="nav-link" href="#">
                 <img  src="./public/images/cart.png" height="20px" width="20px"> Cart</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                  <img  src="./public/images/account.png" height="20px" width="20px"> Your Account</a>
+
+            <?php
+            if (empty($_SESSION['login_user']) != TRUE){
+              echo '
+              <li class="nav-item">
+                <a class="nav-link" href="profile.php">
+                  <img  src="./public/images/account.png" height="20px" width="20px">' . $_SESSION['login_user'] . '</a>';
+                }else{
+                  echo '
+                  <li class="nav-item">
+                    <a class="nav-link" href="login.php">
+                      <img  src="./public/images/account.png" height="20px" width="20px">' . 'Log In' . '</a>';
+                    } ?>
             </li>
           </ul>
         </div>
@@ -77,7 +88,9 @@
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery/index.js"></script>
     <script src="vendor/jquery/products.js"></script>
+
 
   </body>
 

@@ -11,6 +11,8 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data for each row
 
+    echo '<div class="row">
+           <div class="card-deck">';
     while ($row = $result->fetch_assoc()) {
       echo '<div class="card">
               <img class="card-img-top" src="' . $row["img"] . '" alt="">
@@ -21,6 +23,8 @@ if ($result->num_rows > 0) {
               </div>
             </div>';
     }
+    echo '</div></div>';
+
 } else {
     echo "0 results";
 }
