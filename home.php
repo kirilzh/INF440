@@ -3,9 +3,9 @@
   <div class="col-lg-3">
       <h2 class="my-4">Search</h2>
       <div class="form-group">
-          <input class="form-control input-sm" id="search-input" type="text" value="Search">
-          <br>
-          <button class="btn btn-block" id="search-button" type="button"> Submit </button>
+        <input id="search_box" type="text" class="form-control input-sm" placeholder="Enter book name..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <br>
+        <button id="search_query" class="btn btn-primary" type="button">Search</button>
       </div>
     <h2 class="my-4">Browse</h2>
     <div class="list-group">
@@ -25,6 +25,7 @@
 
   <div class="col-lg-9">
 
+    <div id="innerSearch">
     <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -117,6 +118,7 @@
 ?>
 
     </div>
+  </div>
     <!-- /.row -->
 
   </div>
@@ -124,3 +126,4 @@
 
 </div>
 <!-- /.row -->
+<script src="vendor/jquery/home.js"></script>
