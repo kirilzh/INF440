@@ -22,43 +22,12 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <!-- Bootstrap core CSS -->
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
 
 <!-- Custom styles for this template -->
 <link href="css/shop-homepage.css" rel="stylesheet">
 
 </head>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="#"><img src="./public/images/logo.png" style="height:30px;width:30px;margin:0px;"> </a>
-        <a class="navbar-brand" href="#"> The Book Basement </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a id="home_nav" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item">
-              <a id="products_nav" class="nav-link">Products</a>
-            </li>
-            <li class="nav-item">
-              <a img="./images/cart.png" href = "#"></a>
-              <a class="nav-link" href="#">
-                <img  src="./public/images/cart.png" height="20px" width="20px"> Cart</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                  <img  src="./public/images/account.png" height="20px" width="20px"> Your Account</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <body>
-<!------ Include the above in your HEAD tag ---------->
 
 <div class="container">
 	<table id="cart" class="table table-hover table-condensed">
@@ -71,7 +40,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 							<th style="width:10%"></th>
 						</tr>
 					</thead>
-					<tbody>	
+					<tbody>
 
         <?php
             $total = 0;
@@ -94,11 +63,12 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             <td data-th="Subtotal" id="subtotal'.$id.'" class="text-center">$'. $_SESSION['products'][$id]['price'] * $_SESSION['products'][$id]['qty']  .'</td>
             <td class="actions" data-th="">
                 <button name="'.$id.'" class="refresh btn btn-info btn-sm" ><i class="fa fa-refresh"></i></button>
-                <button name="'.$id.'" class="deletebtn btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								
+                <button name="'.$id.'" class="deletebtn btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
             </td>
             </tr>'
             ;
-            }						               
+            }
+            // echo json_encode($_SESSION['products']);
     ?>
 
 						</tr>
@@ -108,10 +78,13 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 							<td class="text-center"><strong>Total 1.99</strong></td>
 						</tr>
 						<tr>
-							<td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+							<td><a href="index.php" class="btn btn-warning">
+                <i class="fa fa-angle-left"></i>Continue Shopping</a></td>
 							<td colspan="2" class="hidden-xs"></td>
-							<td id="total" class="hidden-xs text-center"><strong>Total $<?php echo $total ?></strong></td>
-							<td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+							<td id="total" class="hidden-xs text-center">
+                <!-- <strong>Total $<?php echo $total ?></strong> -->
+              </td>
+							<td><a id="checkout" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
 						</tr>
 					</tfoot>
 				</table>
@@ -121,16 +94,15 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- <script src="vendor/jquery/cart.js"></script> -->
+
 <script>
     $('.refresh').click(function(){
         var refresh_id = this.name;
         var refresh_quant = $('#quant'+refresh_id).val();
         var refresh_price = $('#price'+refresh_id).text();
         refresh_price = refresh_price.substring(1,refresh_price.length);
-        console.log(refresh_price);
+
         var sess = <?php echo json_encode($_SESSION['products']) ?>;
-        console.log(refresh_id);
-        console.log(refresh_quant);
 
         $('#quant'+refresh_id).html(refresh_quant);
         $('#subtotal'+refresh_id).html('$'+refresh_quant*refresh_price);
@@ -138,14 +110,12 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         var total = 0;
         var subtotal = 0;
         for(i = 0; i < 10; i++){
-            console.log($('#subtotal'+i).text());
             if($('#subtotal'+i).text().match(/\d+/) != null){
                 subtotal = ($('#subtotal'+i).text()).match(/\d+/);
                 total = parseFloat(total) + parseFloat(subtotal[0]);
             }
         }
         $('#total').html('Total $'+total);
-        
     });
 
     $('.deletebtn').click(function(){
@@ -164,7 +134,26 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         }
         $('#total').html('Total $'+total);
     });
-    
+
+    var total_quant = 0;
+    var subtotal_quant = 0;
+    $("#checkout").click(function(){
+      for(i = 0; i < 10; i++){
+        if($('#quant'+i).val() != null){
+          subtotal_quant = $('#quant'+i).val();
+          total_quant = parseFloat(total_quant) + parseFloat(subtotal_quant[0]);
+        }
+      }
+      console.log(total_quant);
+      $.ajax({
+        type: "GET",
+        url: "products/checkAuth.php",
+        success: function(data){
+          $("#cart").html(data);
+        }
+      })
+      $('#total_quant').html(total_quant);
+    });
 </script>
 
 </body>
