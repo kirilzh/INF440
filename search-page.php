@@ -49,7 +49,7 @@
         <div class="input-group mb-3">
           <input id="search_box" type="text" class="form-control" placeholder="Enter book name..." aria-label="Recipient's username" aria-describedby="basic-addon2">
           <div class="input-group-append">
-            <button id="search_query" class="btn btn-outline-secondary" type="button">Search</button>
+            <button id="search_query" class="btn btn-outline-secondary" type="submit">Search</button>
           </div>
         </div>
       </div>

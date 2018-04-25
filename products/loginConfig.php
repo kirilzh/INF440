@@ -11,11 +11,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $sql = "SELECT id
             FROM customers
-            WHERE firstName = '$username' and password = '$password'";
+            WHERE username = '$username' and password = '$password'";
     $result = $conn->query($sql);
+
+    $sql = "SELECT *
+            FROM customers
+            WHERE username = '$username' and password = '$password'";
+    $data = $conn->query($sql);
+    $info = $data->fetch_assoc();
 
     if($result->num_rows == 1){
       $_SESSION['login_user'] = $username;
+      $_SESSION['name'] = $info['firstName'] . " " . $info['lastName'];
+      $_SESSION['address'] = $info['address'];
       header("location: ../index.php");
     } else {
       echo "Your login Name or Password is invalid";

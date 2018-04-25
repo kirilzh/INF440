@@ -3,8 +3,8 @@ function openCon()
     {
         $dbhost = "localhost";
         $dbuser = "root";
-        $dbpass = null;
-        $db = 'bookstore';
+        $dbpass = 1234;
+        $db = 'test';
 
         $conn = new mysqli($dbhost, $dbuser, $dbpass, $db);
         return $conn;

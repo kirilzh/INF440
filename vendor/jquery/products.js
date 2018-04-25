@@ -23,7 +23,6 @@ $("#products_nav").click(function() {
     type: "GET",
     url: "products.php",
     success: function(data) {
-      console.log(data);
       $("#res").html(data);
     }
   })

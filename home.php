@@ -2,21 +2,14 @@
   <div class="col-lg-3">
       <h2 class="my-4">Search</h2>
       <div class="form-group">
-        <input id="search_box" type="text" class="form-control input-sm" placeholder="Enter book name..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <input id="search_box" type="text" class="form-control input-sm" placeholder="Enter book name...">
         <br>
-        <button id="search_query" class="btn btn-primary" type="button">Search</button>
+          <button id="search_query" class="btn btn-primary" type="button">Search</button>
       </div>
     <h2 class="my-4">Browse</h2>
     <div class="list-group">
-      <a href="#" class="list-group-item">Science Fiction</a>
-      <a href="#" class="list-group-item">Action and Adventure</a>
-      <a href="#" class="list-group-item">Romance</a>
-      <a href="#" class="list-group-item">Mystery</a>
-      <a href="#" class="list-group-item">History</a>
-      <a href="#" class="list-group-item">Children's</a>
-      <a href="#" class="list-group-item">Poetry</a>
-      <a href="#" class="list-group-item">Foreign Literature</a>
-
+      <button id="non-fiction" class="btn" type="button">Non-fiction</button>
+      <button id="fiction" class="btn" type="button">Fiction</button>
     </div>
 
   </div>
@@ -50,12 +43,12 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
-    <div class="row">
+    <div id="b" class="row">
     <?php
     session_start();
 
     include "./home/db_connection.php";
-    
+
     $sql = "SELECT * FROM books";
     $result = $conn->query($sql);
 
@@ -71,14 +64,14 @@
         }
         return $trimmed_text;
     };
-    
+
     if ($result->num_rows > 0) {
         //keep track of number of items displayed on home page
         $num = 1;
         while ($num<7) {
             $row = $result->fetch_assoc();
             echo '
-            
+
             <div class="col-lg-4 col-md-6 mb-4">
             <form method="post" action="cart.php">
               <div class="card h-100" style="height:18rem;">
@@ -92,23 +85,19 @@
                 </h5>
                 <h5> $' .$row["price"] . '</h5>
                 <p class="card-text" maxlength=50>'.trimtext($row["description"]).'<a href="#"> ...(more)</a> </p>
-                <input type="text" name="quantity" value="1" size="2"/> <input type="submit" name="add" class="btn-primary" value="Add to card" />
+                <input type="text" name="quantity" value="1" size="2"/>
+                <input type="submit" name="add" class="btn btn-primary" value="Add to cart" />
                 <input type="hidden" name="isbn" value=' .$row['isbn'].'>
               </div>
             </div>
             </form>
           </div>
-          '
-        ;
+          ';
 
             $num+=1;
         }
-        
-    }
 
-
-
-?>
+    } ?>
 
     </div>
   </div>

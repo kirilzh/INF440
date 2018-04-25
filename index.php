@@ -20,8 +20,6 @@
   </head>
 
   <body>
-
-
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
@@ -38,15 +36,14 @@
             <li class="nav-item">
               <a id="products_nav" class="nav-link">Products</a>
             </li>
-            <li class="nav-item">
-              <a img="./images/cart.png" href = "#"></a>
-              <a class="nav-link" href="#">
-                <img  src="./public/images/cart.png" height="20px" width="20px"> Cart</a>
-            </li>
 
             <?php
             if (empty($_SESSION['login_user']) != TRUE){
               echo '
+              <li class="nav-item">
+                <a class="nav-link" href="cart.php">
+                  <img  src="./public/images/cart.png" height="20px" width="20px"> Cart</a>
+              </li>
               <li class="nav-item">
                 <a class="nav-link" href="profile.php">
                   <img  src="./public/images/account.png" height="20px" width="20px">' . $_SESSION['login_user'] . '</a>';
